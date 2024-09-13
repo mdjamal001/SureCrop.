@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sure_crop/screens/subcategory_page.dart';
 Color primaryCol = const Color(0xFF33A864);
 
 class BuyerHomePage extends StatefulWidget {
@@ -207,7 +208,12 @@ class _CategoryGridState extends State<CategoryGrid> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            print('Clicked on ${categories[index]['name']}');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SubCategoryPage(categories[index]['name'], category: '',),
+              ),
+            );
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -223,11 +229,6 @@ class _CategoryGridState extends State<CategoryGrid> {
                   child: ClipOval(
                     child: Material(
                       color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {
-                          print('Clicked on ${categories[index]['name']} image');
-                        },
-                        splashColor: Colors.black.withOpacity(0.9),
                         child: Image.asset(
                           categories[index]['image']!,
                           width: 60,
@@ -238,7 +239,6 @@ class _CategoryGridState extends State<CategoryGrid> {
                     ),
                   ),
                 ),
-              ),
               SizedBox(height: 5),
               Text(
                 categories[index]['name']!,
@@ -256,6 +256,7 @@ class _CategoryGridState extends State<CategoryGrid> {
     );
   }
 }
+
 
 class SearchPage extends StatelessWidget{
   @override

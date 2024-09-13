@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'screens/login_page.dart';
 import 'screens/buyer_home_page.dart';
 import 'screens/seller_home_page.dart';
-import 'screens/signup_page.dart';// Import other screens as needed
+import 'screens/signup_page.dart';
+import 'screens/subcategory_page.dart';// Import other screens as needed
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  String? get categori => null;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
         '/buyerHome': (context) => BuyerHomePage(),
-        '/sellerHome': (context) => SellerHomePage(),// Define other routes as needed
+        '/sellerHome': (context) => SellerHomePage(),
       },
     );
   }
