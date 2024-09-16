@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Color primaryCol = const Color(0xFF33A864);
 
@@ -10,9 +12,56 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
-  String _email = '';
+  String _phoneno = ''; // Store phone number as a string for simplicity
   String _password = '';
   String _role = 'Buyer'; // Default value for dropdown
+  bool _isLoading = false;
+
+  // Function to send sign-up data to the server
+  Future<void> _signUp() async {
+    final url = Uri.parse('https://0a38-2401-4900-658d-23ac-80ea-2185-2de6-22bb.ngrok-free.app/signup'); // Replace with your server URL
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // Prepare the request body
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'name': _name,
+          'phoneno': _phoneno,
+          'password': _password,
+          'role': _role,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        // Handle success
+        final responseData = json.decode(response.body);
+        print('User signed up successfully: $responseData');
+
+        if (_role == 'Buyer') {
+          Navigator.pushNamed(context, '/buyerHome');
+        } else {
+          Navigator.pushNamed(context, '/sellerHome');
+        }
+      } else {
+        // Handle failure
+        print('Failed to sign up: ${response.body}');
+      }
+    } catch (error) {
+      print('Error during sign up: $error');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,22 +108,22 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Phone no.',
                     labelStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF33A864)),
                     ),
                   ),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'Please enter your phone number';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _email = value!;
+                    _phoneno = value!;
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -122,17 +171,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                 ),
                 SizedBox(height: 40.0),
-                ElevatedButton(
+                _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      // Handle sign-up logic and navigate based on role
-                      if(_role == 'Buyer'){
-                        Navigator.pushNamed(context, '/buyerHome');
-                      }
-                      else{
-                        Navigator.pushNamed(context, '/sellerHome');
-                      }
+                      _signUp(); // Call sign-up function
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -141,10 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   child: Text(
                     'Sign Up',
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white
-                    ),
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
                   ),
                 ),
                 SizedBox(height: 20.0),

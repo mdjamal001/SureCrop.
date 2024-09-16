@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sure_crop/screens/subcategory_page.dart';
+
 Color primaryCol = const Color(0xFF33A864);
 
 class BuyerHomePage extends StatefulWidget {
@@ -27,7 +28,6 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: _pages[_selectedIndex], //Display selected page
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -54,19 +54,19 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: primaryCol,
-          child: Icon(Icons.mic),
+        onPressed: () {},
+        backgroundColor: primaryCol,
+        child: Icon(Icons.mic),
       ),
     );
   }
 }
 
-class HomePage extends StatelessWidget{
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -93,10 +93,13 @@ class HomePage extends StatelessWidget{
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.asset(
-                'assets/images/heroimage.png',
-                fit: BoxFit.cover,
-              )
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/images/heroimage.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             SizedBox(height: 20),
             Center(
@@ -104,18 +107,17 @@ class HomePage extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.description),
-                      label: Text('My Contracts'),
-                      style: ElevatedButton.styleFrom(
+                    onPressed: () {},
+                    icon: Icon(Icons.description),
+                    label: Text('My Contracts'),
+                    style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)
-                        ),
+                            borderRadius: BorderRadius.circular(8)),
                         backgroundColor: primaryCol,
                         foregroundColor: Colors.grey.shade200,
-                        textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                      ),
+                        textStyle: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
                   ElevatedButton.icon(
                     onPressed: () {},
@@ -124,12 +126,11 @@ class HomePage extends StatelessWidget{
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)
-                        ),
+                            borderRadius: BorderRadius.circular(8)),
                         backgroundColor: primaryCol,
                         foregroundColor: Colors.grey.shade200,
-                        textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                    ),
+                        textStyle: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -147,28 +148,11 @@ class HomePage extends StatelessWidget{
 
             CategoryGrid(),
 
-            SizedBox(height: 20),
-            //Popular and Trending Section
-            Text(
-              'Popular & Trending Contracts',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.green.shade100,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            SizedBox(height: 200),
           ],
         ),
       ),
-      );
+    );
   }
 }
 
@@ -211,7 +195,10 @@ class _CategoryGridState extends State<CategoryGrid> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SubCategoryPage(categories[index]['name'], category: '',),
+                builder: (context) => SubCategoryPage(
+                  categories[index]['name'],
+                  category: '',
+                ),
               ),
             );
           },
@@ -229,16 +216,16 @@ class _CategoryGridState extends State<CategoryGrid> {
                   child: ClipOval(
                     child: Material(
                       color: Colors.transparent,
-                        child: Image.asset(
-                          categories[index]['image']!,
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.cover,
-                        ),
+                      child: Image.asset(
+                        categories[index]['image']!,
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
+              ),
               SizedBox(height: 5),
               Text(
                 categories[index]['name']!,
@@ -257,63 +244,72 @@ class _CategoryGridState extends State<CategoryGrid> {
   }
 }
 
-
-class SearchPage extends StatelessWidget{
+class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
-        appBar: AppBar(
-          title: Text('Search',style: TextStyle(color: Colors.white),),
-          backgroundColor: primaryCol,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Search',
+          style: TextStyle(color: Colors.white),
         ),
-        body:Padding(
-      padding: EdgeInsets.all(16.0),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: 'Search',
-          labelStyle: TextStyle(color: Colors.grey),
-          filled: true,
-          fillColor: Colors.grey.shade300,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
+        backgroundColor: primaryCol,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: TextField(
+          decoration: InputDecoration(
+            labelText: 'Search',
+            labelStyle: TextStyle(color: Colors.grey),
+            filled: true,
+            fillColor: Colors.grey.shade300,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            prefixIcon: Icon(Icons.search),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          prefixIcon: Icon(Icons.search),
         ),
       ),
-        ),
     );
   }
 }
 
-class HistoryPage extends StatelessWidget{
+class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: Text('Contract History',),
+        title: Text(
+          'Contract History',
+        ),
         backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            _buildHistoryItem('Contract 1', 'Completed on 2024-09-01', '5 tons of wheat', 'assets/contract_image1.png'),
-            _buildHistoryItem('Contract 2', 'Completed on 2024-08-25', '10 tons of rice', 'assets/contract_image2.png'),
-            _buildHistoryItem('Contract 3', 'Completed on 2024-08-15', '3 tons of corn', 'assets/contract_image3.png'),
-            _buildHistoryItem('Contract 4', 'Completed on 2024-07-30', '2 tons of soybeans', 'assets/contract_image4.png'),
-            _buildHistoryItem('Contract 5', 'Completed on 2024-07-01', '8 tons of barley', 'assets/contract_image5.png'),
+            _buildHistoryItem('Contract 1', 'Completed on 2024-09-01',
+                '5 tons of wheat', 'assets/contract_image1.png'),
+            _buildHistoryItem('Contract 2', 'Completed on 2024-08-25',
+                '10 tons of rice', 'assets/contract_image2.png'),
+            _buildHistoryItem('Contract 3', 'Completed on 2024-08-15',
+                '3 tons of corn', 'assets/contract_image3.png'),
+            _buildHistoryItem('Contract 4', 'Completed on 2024-07-30',
+                '2 tons of soybeans', 'assets/contract_image4.png'),
+            _buildHistoryItem('Contract 5', 'Completed on 2024-07-01',
+                '8 tons of barley', 'assets/contract_image5.png'),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHistoryItem(String title, String date, String description, String imagePath) {
+  Widget _buildHistoryItem(
+      String title, String date, String description, String imagePath) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.only(bottom: 16.0),
@@ -359,14 +355,16 @@ class HistoryPage extends StatelessWidget{
   }
 }
 
-
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: Text('Profile', style: TextStyle(color: Colors.black),),
+        title: Text(
+          'Profile',
+          style: TextStyle(color: Colors.black),
+        ),
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -387,7 +385,10 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 40,
-                        child: Icon(Icons.person, size: 35,),
+                        child: Icon(
+                          Icons.person,
+                          size: 35,
+                        ),
                         backgroundColor: Colors.grey.shade300,
                       ),
                       SizedBox(width: 16),
@@ -414,8 +415,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                         icon: Icon(Icons.edit, color: Colors.green),
                       ),
                     ],
@@ -464,30 +464,41 @@ class ProfilePage extends StatelessWidget {
               // Option Cards
               _buildOptionCard(Icons.work, 'Manage Contracts',
                   'View and manage your contracts'),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               _buildOptionCard(
                   Icons.history, 'Activity', 'Check your recent activities'),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               _buildOptionCard(
                   Icons.settings, 'Preferences', 'Adjust your preferences'),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               _buildOptionCard(
                   Icons.language, 'App Language', 'Change the app language'),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               _buildOptionCard(
                   Icons.settings, 'Settings', 'Manage your account settings'),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
               _buildOptionCard(
                   Icons.logout, 'Logout', 'Sign out from your account',
                   color: Colors.red),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
 
   Widget _buildOptionCard(IconData icon, String title, String subtitle,
       {Color color = const Color(0xFF33B864)}) {
@@ -499,8 +510,7 @@ class ProfilePage extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: () {
-        },
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Row(

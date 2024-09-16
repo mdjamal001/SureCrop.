@@ -19,6 +19,16 @@ class SubCategoryPage extends StatelessWidget{
             color: Colors.black
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.filter_alt),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
 

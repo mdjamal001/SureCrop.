@@ -1,15 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 Color primaryCol = const Color(0xFF33A864);
 
-class LoginPage extends StatefulWidget {
+class LogInPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LogInPageState createState() => _LogInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LogInPageState extends State<LogInPage> {
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
+  String _phoneno = '';
   String _password = '';
+  bool _isLoading = false;
+
+  // Function to handle sign-in
+  Future<void> _signIn() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      setState(() {
+        _isLoading = true; // Show the loading indicator
+      });
+
+      final url = 'https://0a38-2401-4900-658d-23ac-80ea-2185-2de6-22bb.ngrok-free.app/signin'; // Your updated backend URL
+
+      try {
+        final response = await http.post(
+          Uri.parse(url),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'phoneno': _phoneno,
+            'password': _password
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          final responseData = jsonDecode(response.body);
+          final role = responseData['role'];
+
+          // Navigate based on role
+          if (role == 'Buyer') {
+            Navigator.pushNamed(context, '/buyerHome');
+          } else {
+            Navigator.pushNamed(context, '/sellerHome');
+          }
+
+        } else {
+          // Handle error response
+          final responseData = jsonDecode(response.body);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${responseData['error']}')),
+          );
+        }
+      } catch (error) {
+        // Handle network error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Network Error: $error')),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false; // Hide the loading indicator
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Welcome!',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  'Login to continue',
+                  'Sign In',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 32.0,
@@ -45,22 +92,22 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 40.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Phone no.',
                     labelStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF33A864)),
                     ),
                   ),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'Please enter your phone number';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _email = value!;
+                    _phoneno = value!;
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -85,34 +132,26 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 SizedBox(height: 40.0),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      // Handle login logic
-                      Navigator.pushNamed(context, '/home');
-                    }
-                  },
+                _isLoading
+                    ? Center(child: CircularProgressIndicator()) // Loading spinner
+                    : ElevatedButton(
+                  onPressed: _signIn, // Call sign-in function
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryCol,
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                   ),
                   child: Text(
-                    'Login',
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white
-                    ),
+                    'Sign In',
+                    style: TextStyle(fontSize: 18.0, color: Colors.white),
                   ),
                 ),
                 SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {
-                    // Navigate to a sign-up page or other
-                    Navigator.pushNamed(context, '/signup');
+                    Navigator.pushNamed(context, '/signup'); // Navigate to sign-up page
                   },
                   child: Text(
-                    'Don\'t have an account? Sign up',
+                    'Don’t have an account? Sign Up',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'create_contract.dart';
 Color primaryCol = const Color(0xFF33A864);
 
 class SellerHomePage extends StatefulWidget {
@@ -134,7 +135,9 @@ class HomePage extends StatelessWidget{
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/contractForm');
+        },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
