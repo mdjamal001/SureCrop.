@@ -19,7 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // Function to send sign-up data to the server
   Future<void> _signUp() async {
-    final url = Uri.parse('https://0a38-2401-4900-658d-23ac-80ea-2185-2de6-22bb.ngrok-free.app/signup'); // Replace with your server URL
+    final url = Uri.parse('https://f544-2401-4900-6751-f32d-d35-fd4-1214-8c09.ngrok-free.app/signup'); // Replace with your server URL
 
     setState(() {
       _isLoading = true;
