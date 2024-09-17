@@ -70,10 +70,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.green.shade800),
-          onPressed: () {},
-        ),
+        automaticallyImplyLeading: false,
         title: Image.asset('assets/app_logo.png', height: 40),
         actions: [
           IconButton(

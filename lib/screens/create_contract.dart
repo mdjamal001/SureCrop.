@@ -16,13 +16,40 @@ class _ContractFormState extends State<ContractForm> {
   String _price = '';
   String _deliveryDate = '';
 
-  List<String> cropCategories = ['Grains', 'Vegetables', 'Fruits', 'Spices'];
+  DateTime _selectedDate = DateTime.now();
+
+  List<String> cropCategories = ['Grains', 'Vegetables', 'Fruits', 'Spices', 'Livestock', 'Aquaculture', 'Medicinal', 'Fibers', 'Beverages', 'Dairy','Oilseeds', 'Nuts',];
+
   Map<String, List<String>> cropOptions = {
-    'Grains': ['Wheat', 'Rice', 'Barley'],
-    'Vegetables': ['Potato', 'Tomato', 'Carrot'],
-    'Fruits': ['Mango', 'Apple', 'Banana'],
-    'Spices': ['Chili', 'Turmeric', 'Coriander']
+    'Grains': ['Wheat', 'Rice', 'Barley', 'Oats', 'Corn', 'Sorghum', 'Millet', 'Rye', 'Quinoa', 'Buckwheat'],
+    'Vegetables': ['Potato', 'Tomato', 'Carrot', 'Broccoli', 'Spinach', 'Cucumber', 'Pepper', 'Onion', 'Cauliflower', 'Lettuce'],
+    'Fruits': ['Mango', 'Apple', 'Banana', 'Orange', 'Grapes', 'Pineapple', 'Strawberry', 'Blueberry', 'Pomegranate', 'Peach'],
+    'Spices': ['Chili', 'Turmeric', 'Coriander', 'Cumin', 'Cardamom', 'Cloves', 'Black Pepper', 'Mustard', 'Ginger', 'Nutmeg'],
+    'Livestock': ['Cattle', 'Sheep', 'Goat', 'Pigs', 'Chicken', 'Turkey', 'Duck', 'Horse', 'Rabbit', 'Alpaca'],
+    'Aquaculture': ['Salmon', 'Prawns', 'Catfish', 'Shrimp', 'Oysters', 'Mussels', 'Crab'],
+    'Medicinal': ['Aloe Vera', 'Ginseng', 'Lavender', 'Echinacea', 'Peppermint', 'Ginger', 'Turmeric', 'Chamomile', 'Garlic', 'Valerian Root'],
+    'Fibers': ['Cotton', 'Jute', 'Hemp', 'Flax', 'Silk', 'Wool', 'Bamboo', 'Ramie', 'Kenaf', 'Sisal'],
+    'Beverages': ['Coffee', 'Tea', 'Cocoa', 'Juice', 'Wine', 'Beer', 'Lemonade', 'Smoothie', 'Herbal Tea', 'Soda'],
+    'Dairy': ['Milk', 'Cheese', 'Yogurt', 'Butter', 'Cream', 'Kefir', 'Cottage Cheese', 'Buttermilk', 'Sour Cream', 'Ghee'],
+    'Oilseeds': ['Soybean', 'Sunflower', 'Canola', 'Peanut', 'Flaxseed', 'Sesame', 'Safflower', 'Pumpkin Seed', 'Hemp Seed', 'Mustard Seed'],
+    'Nuts': ['Almond', 'Walnut', 'Cashew', 'Pistachio', 'Hazelnut', 'Brazil Nut', 'Macadamia', 'Pine Nut', 'Chestnut', 'Pecan']
   };
+
+
+  // Function to handle date picker
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2030),
+    );
+    if (pickedDate != null && pickedDate != _selectedDate) {
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    }
+  }
 
   // Function to handle form submission
   void _submitForm() {
@@ -98,16 +125,40 @@ class _ContractFormState extends State<ContractForm> {
                 // Price Text Field
                 _buildTextField(
                   label: 'Price per kg (₹)',
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.datetime,
                   onSaved: (value) => _price = value!,
                 ),
                 SizedBox(height: 20),
 
-                // Delivery Date Text Field
-                _buildTextField(
-                  label: 'Delivery Date',
-                  keyboardType: TextInputType.datetime,
-                  onSaved: (value) => _deliveryDate = value!,
+                // Delivery Date Picker
+                GestureDetector(
+                  onTap: () => _selectDate(context),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xFF33A864), width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Select date: ${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}',
+                          style: TextStyle(fontSize: 18, color: Colors.black87),
+                        ),
+                        Icon(Icons.calendar_today, color: Color(0xFF33A864)),
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(height: 40),
 
@@ -141,12 +192,12 @@ class _ContractFormState extends State<ContractForm> {
     );
   }
 
-  // Helper to build dropdowns with consistent styling
   Widget _buildDropdown({
     required String label,
     required String? value,
     required List<String> items,
     required ValueChanged<String?> onChanged,
+    double? dropdownWidth, // Custom width for dropdown menu
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -164,7 +215,7 @@ class _ContractFormState extends State<ContractForm> {
           filled: true,
           fillColor: Colors.transparent,
         ),
-        value: value,
+        value: value ?? items.first, // Set default value if value is null
         items: items.map((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -172,6 +223,11 @@ class _ContractFormState extends State<ContractForm> {
           );
         }).toList(),
         onChanged: onChanged,
+        isExpanded:
+            true, // Ensure text doesn't get truncated inside the dropdown
+        menuMaxHeight:
+            200, // Custom max height for the dropdown menu (scrollable)
+        icon: Icon(Icons.arrow_drop_down),
       ),
     );
   }

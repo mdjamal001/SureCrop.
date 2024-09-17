@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Farmer-Buyer Contract',
       theme: ThemeData(
+        primaryColor: Color(0xFF33A864),
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
