@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:sure_crop/screens/terms_conditions.dart';
+
 Color primaryCol = const Color(0xFF33A864);
 
 class SignUpPage extends StatefulWidget {
@@ -17,9 +19,12 @@ class _SignUpPageState extends State<SignUpPage> {
   String _role = 'Buyer'; // Default value for dropdown
   bool _isLoading = false;
 
+  bool isChecked = false;
+
   // Function to send sign-up data to the server
   Future<void> _signUp() async {
-    final url = Uri.parse('https://f544-2401-4900-6751-f32d-d35-fd4-1214-8c09.ngrok-free.app/signup'); // Replace with your server URL
+    final url = Uri.parse(
+        'https://f544-2401-4900-6751-f32d-d35-fd4-1214-8c09.ngrok-free.app/signup'); // Replace with your server URL
 
     setState(() {
       _isLoading = true;
@@ -170,25 +175,78 @@ class _SignUpPageState extends State<SignUpPage> {
                     });
                   },
                 ),
-                SizedBox(height: 40.0),
+                SizedBox(height: 20.0),
+                Row(
+                  children: [
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        unselectedWidgetColor:
+                            Colors.green, // Border color of unchecked box
+                        checkboxTheme: CheckboxThemeData(
+                          fillColor: WidgetStateProperty.all(
+                              primaryCol), // Background color when checked
+                        ),
+                      ),
+                      child: Checkbox(
+                        value: isChecked,
+                        onChanged: (bool? newValue) {
+                          setState(() {
+                            isChecked = newValue!;
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Text(
+                            "I agree to the",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => TermsAndConditionsPage()),
+                              );
+                            },
+                            child: Text(
+                              " Terms and Conditions",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: primaryCol,
+
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.0),
                 _isLoading
                     ? Center(child: CircularProgressIndicator())
                     : ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      _signUp(); // Call sign-up function
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryCol,
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                  ),
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
-                ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate() && isChecked) {
+                            _formKey.currentState!.save();
+                            _signUp(); // Call sign-up function
+                          } else {
+                            print("Fields not filled or checkbox not checked");
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryCol,
+                          padding: EdgeInsets.symmetric(vertical: 16.0),
+                        ),
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
                 SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {

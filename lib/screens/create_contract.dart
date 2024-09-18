@@ -11,30 +11,190 @@ class _ContractFormState extends State<ContractForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _cropCategory = 'Grains';
+  String _month = 'January';
   String _crop = '';
   String _quantity = '';
+  String _minOrderQuantity = '';
   String _price = '';
   String _deliveryDate = '';
 
+  String? _selectedPaymentMethod = 'Bank Transfer';
+
   DateTime _selectedDate = DateTime.now();
 
-  List<String> cropCategories = ['Grains', 'Vegetables', 'Fruits', 'Spices', 'Livestock', 'Aquaculture', 'Medicinal', 'Fibers', 'Beverages', 'Dairy','Oilseeds', 'Nuts',];
+  List<String> cropCategories = [
+    'Grains',
+    'Vegetables',
+    'Fruits',
+    'Spices',
+    'Livestock',
+    'Aquaculture',
+    'Medicinal',
+    'Fibers',
+    'Beverages',
+    'Dairy',
+    'Oilseeds',
+    'Nuts',
+  ];
+
+  List<String> months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   Map<String, List<String>> cropOptions = {
-    'Grains': ['Wheat', 'Rice', 'Barley', 'Oats', 'Corn', 'Sorghum', 'Millet', 'Rye', 'Quinoa', 'Buckwheat'],
-    'Vegetables': ['Potato', 'Tomato', 'Carrot', 'Broccoli', 'Spinach', 'Cucumber', 'Pepper', 'Onion', 'Cauliflower', 'Lettuce'],
-    'Fruits': ['Mango', 'Apple', 'Banana', 'Orange', 'Grapes', 'Pineapple', 'Strawberry', 'Blueberry', 'Pomegranate', 'Peach'],
-    'Spices': ['Chili', 'Turmeric', 'Coriander', 'Cumin', 'Cardamom', 'Cloves', 'Black Pepper', 'Mustard', 'Ginger', 'Nutmeg'],
-    'Livestock': ['Cattle', 'Sheep', 'Goat', 'Pigs', 'Chicken', 'Turkey', 'Duck', 'Horse', 'Rabbit', 'Alpaca'],
-    'Aquaculture': ['Salmon', 'Prawns', 'Catfish', 'Shrimp', 'Oysters', 'Mussels', 'Crab'],
-    'Medicinal': ['Aloe Vera', 'Ginseng', 'Lavender', 'Echinacea', 'Peppermint', 'Ginger', 'Turmeric', 'Chamomile', 'Garlic', 'Valerian Root'],
-    'Fibers': ['Cotton', 'Jute', 'Hemp', 'Flax', 'Silk', 'Wool', 'Bamboo', 'Ramie', 'Kenaf', 'Sisal'],
-    'Beverages': ['Coffee', 'Tea', 'Cocoa', 'Juice', 'Wine', 'Beer', 'Lemonade', 'Smoothie', 'Herbal Tea', 'Soda'],
-    'Dairy': ['Milk', 'Cheese', 'Yogurt', 'Butter', 'Cream', 'Kefir', 'Cottage Cheese', 'Buttermilk', 'Sour Cream', 'Ghee'],
-    'Oilseeds': ['Soybean', 'Sunflower', 'Canola', 'Peanut', 'Flaxseed', 'Sesame', 'Safflower', 'Pumpkin Seed', 'Hemp Seed', 'Mustard Seed'],
-    'Nuts': ['Almond', 'Walnut', 'Cashew', 'Pistachio', 'Hazelnut', 'Brazil Nut', 'Macadamia', 'Pine Nut', 'Chestnut', 'Pecan']
+    'Grains': [
+      'Wheat',
+      'Rice',
+      'Barley',
+      'Oats',
+      'Corn',
+      'Sorghum',
+      'Millet',
+      'Rye',
+      'Quinoa',
+      'Buckwheat'
+    ],
+    'Vegetables': [
+      'Potato',
+      'Tomato',
+      'Carrot',
+      'Broccoli',
+      'Spinach',
+      'Cucumber',
+      'Pepper',
+      'Onion',
+      'Cauliflower',
+      'Lettuce'
+    ],
+    'Fruits': [
+      'Mango',
+      'Apple',
+      'Banana',
+      'Orange',
+      'Grapes',
+      'Pineapple',
+      'Strawberry',
+      'Blueberry',
+      'Pomegranate',
+      'Peach'
+    ],
+    'Spices': [
+      'Chili',
+      'Turmeric',
+      'Coriander',
+      'Cumin',
+      'Cardamom',
+      'Cloves',
+      'Black Pepper',
+      'Mustard',
+      'Ginger',
+      'Nutmeg'
+    ],
+    'Livestock': [
+      'Cattle',
+      'Sheep',
+      'Goat',
+      'Pigs',
+      'Chicken',
+      'Turkey',
+      'Duck',
+      'Horse',
+      'Rabbit',
+      'Alpaca'
+    ],
+    'Aquaculture': [
+      'Salmon',
+      'Prawns',
+      'Catfish',
+      'Shrimp',
+      'Oysters',
+      'Mussels',
+      'Crab'
+    ],
+    'Medicinal': [
+      'Aloe Vera',
+      'Ginseng',
+      'Lavender',
+      'Echinacea',
+      'Peppermint',
+      'Ginger',
+      'Turmeric',
+      'Chamomile',
+      'Garlic',
+      'Valerian Root'
+    ],
+    'Fibers': [
+      'Cotton',
+      'Jute',
+      'Hemp',
+      'Flax',
+      'Silk',
+      'Wool',
+      'Bamboo',
+      'Ramie',
+      'Kenaf',
+      'Sisal'
+    ],
+    'Beverages': [
+      'Coffee',
+      'Tea',
+      'Cocoa',
+      'Juice',
+      'Wine',
+      'Beer',
+      'Lemonade',
+      'Smoothie',
+      'Herbal Tea',
+      'Soda'
+    ],
+    'Dairy': [
+      'Milk',
+      'Cheese',
+      'Yogurt',
+      'Butter',
+      'Cream',
+      'Kefir',
+      'Cottage Cheese',
+      'Buttermilk',
+      'Sour Cream',
+      'Ghee'
+    ],
+    'Oilseeds': [
+      'Soybean',
+      'Sunflower',
+      'Canola',
+      'Peanut',
+      'Flaxseed',
+      'Sesame',
+      'Safflower',
+      'Pumpkin Seed',
+      'Hemp Seed',
+      'Mustard Seed'
+    ],
+    'Nuts': [
+      'Almond',
+      'Walnut',
+      'Cashew',
+      'Pistachio',
+      'Hazelnut',
+      'Brazil Nut',
+      'Macadamia',
+      'Pine Nut',
+      'Chestnut',
+      'Pecan'
+    ]
   };
-
 
   // Function to handle date picker
   Future<void> _selectDate(BuildContext context) async {
@@ -71,7 +231,7 @@ class _ContractFormState extends State<ContractForm> {
         elevation: 8,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -79,9 +239,9 @@ class _ContractFormState extends State<ContractForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Enter Contract Details',
+                  'Crop Details',
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -114,11 +274,39 @@ class _ContractFormState extends State<ContractForm> {
                 ),
                 SizedBox(height: 20),
 
+                _buildDropdown(
+                  label: 'Month of Harvest',
+                  value: _month,
+                  items: months,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _month = newValue!;
+                    });
+                  },
+                ),
+                SizedBox(height: 30),
+
+                Text(
+                  'Quantity and Price Details',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20),
+
                 // Quantity Text Field
                 _buildTextField(
                   label: 'Quantity (kg)',
                   keyboardType: TextInputType.number,
                   onSaved: (value) => _quantity = value!,
+                ),
+                SizedBox(height: 20),
+
+                _buildTextField(
+                  label: 'Minimum Order Quantity (in kg)',
+                  keyboardType: TextInputType.number,
+                  onSaved: (value) => _minOrderQuantity = value!,
                 ),
                 SizedBox(height: 20),
 
@@ -128,39 +316,86 @@ class _ContractFormState extends State<ContractForm> {
                   keyboardType: TextInputType.datetime,
                   onSaved: (value) => _price = value!,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
 
-                // Delivery Date Picker
-                GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFF33A864), width: 2),
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Select date: ${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}',
-                          style: TextStyle(fontSize: 18, color: Colors.black87),
-                        ),
-                        Icon(Icons.calendar_today, color: Color(0xFF33A864)),
-                      ],
-                    ),
+                Text(
+                  'Payment Details',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Choose Payment Method:',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      // Bank Transfer
+                      ListTile(
+                        title: const Text('Bank Transfer'),
+                        leading: Radio<String>(
+                          value: 'Bank Transfer',
+                          activeColor: primaryCol,
+                          groupValue: _selectedPaymentMethod,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedPaymentMethod = value;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Cash
+                      ListTile(
+                        title: const Text('Cash'),
+                        leading: Radio<String>(
+                          value: 'Cash',
+                          activeColor: primaryCol,
+                          groupValue: _selectedPaymentMethod,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedPaymentMethod = value;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // UPI
+                      ListTile(
+                        title: const Text('UPI'),
+                        leading: Radio<String>(
+                          value: 'UPI',
+                          activeColor: primaryCol,
+                          groupValue: _selectedPaymentMethod,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedPaymentMethod = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
 
                 // Submit Button
                 Center(
@@ -176,7 +411,7 @@ class _ContractFormState extends State<ContractForm> {
                       elevation: 10,
                     ),
                     child: Text(
-                      'Submit Contract',
+                      'Post Details',
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -184,6 +419,7 @@ class _ContractFormState extends State<ContractForm> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,)
               ],
             ),
           ),

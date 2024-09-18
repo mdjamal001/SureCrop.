@@ -4,7 +4,6 @@ import 'screens/buyer_home_page.dart';
 import 'screens/seller_home_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/create_contract.dart';
-import 'screens/subcategory_page.dart';// Import other screens as needed
 
 void main() {
   runApp(MyApp());

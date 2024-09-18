@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget{
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -126,11 +126,165 @@ class HomePage extends StatelessWidget{
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            //Categories Section
+            SizedBox(height: 40),
+            //tutorial videos
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Watch Tutorial Videos',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  height: 200, // Set the height of the container
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal, // Scroll horizontally
+                    child: Row(
+                      children: List.generate(5, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              // Implement action on video tap
+                              print('Play video $index');
+                            },
+                            child: Container(
+                              width: 300, // Set width for each video card
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.play_circle_outline, size: 80, color: Colors.grey.shade600),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'Tutorial Video ${index + 1}',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey.shade700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Text(
+              "Need Help?",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade900,
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Contact Support (24x7)",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                    ),
+                  ),
+                  Icon(
+                    Icons.headset_mic,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: primaryCol,
+                borderRadius: BorderRadius.circular(10),
+              ),
+
+            ),
+
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Talk to an expert",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                    ),
+                  ),
+                  Icon(
+                    Icons.phone_in_talk,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: primaryCol,
+                borderRadius: BorderRadius.circular(10),
+              ),
+
+            ),
+
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "App guide",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                    ),
+                  ),
+                  Icon(
+                    Icons.info,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: primaryCol,
+                borderRadius: BorderRadius.circular(10),
+              ),
+
+            ),
+
+            SizedBox(height: 65),
           ],
         ),
       ),
+
+
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, '/contractForm');
