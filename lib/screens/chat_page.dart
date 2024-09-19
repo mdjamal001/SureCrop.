@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sure_crop/screens/buyer_home_page.dart';
 
 class ChatPage extends StatefulWidget {
-  final String userName; // The name of the person you're chatting with
+  final String userName;
 
   ChatPage({required this.userName});
 

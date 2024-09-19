@@ -8,7 +8,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  String _selectedPaymentMethod = 'Card'; // Default selection
+  String _selectedPaymentMethod = 'Card';
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Green button color
-                padding: EdgeInsets.symmetric(vertical: 16), // Bigger button
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 16),
               ),
               child: Center(
                 child: Text(
@@ -61,7 +61,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  // Widget to show payment method radio buttons
   Widget _buildPaymentOptions() {
     return Column(
       children: [
@@ -99,7 +98,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  // Widget to show the respective input fields for the selected payment method
   Widget _buildPaymentFields() {
     switch (_selectedPaymentMethod) {
       case 'Card':
@@ -113,7 +111,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
-  // Card payment fields
   Widget _buildCardFields() {
     return Column(
       children: [
@@ -144,7 +141,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  // UPI payment field
   Widget _buildUPIFields() {
     return TextField(
       decoration: InputDecoration(labelText: 'UPI ID'),

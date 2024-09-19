@@ -14,14 +14,13 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
-  String _phoneno = ''; // Store phone number as a string for simplicity
+  String _phoneno = '';
   String _password = '';
-  String _role = 'Buyer'; // Default value for dropdown
+  String _role = 'Buyer';
   bool _isLoading = false;
 
   bool isChecked = false;
 
-  // Function to send sign-up data to the server
   Future<void> _signUp() async {
     final url = Uri.parse(
         'https://f544-2401-4900-6751-f32d-d35-fd4-1214-8c09.ngrok-free.app/signup'); // Replace with your server URL
@@ -31,7 +30,6 @@ class _SignUpPageState extends State<SignUpPage> {
     });
 
     try {
-      // Prepare the request body
       final response = await http.post(
         url,
         headers: {
@@ -181,10 +179,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     Theme(
                       data: Theme.of(context).copyWith(
                         unselectedWidgetColor:
-                            Colors.green, // Border color of unchecked box
+                            Colors.green,
                         checkboxTheme: CheckboxThemeData(
                           fillColor: WidgetStateProperty.all(
-                              primaryCol), // Background color when checked
+                              primaryCol),
                         ),
                       ),
                       child: Checkbox(
@@ -251,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signin'); // Navigate back to login
+                    Navigator.pushNamed(context, '/signin');
                   },
                   child: Text(
                     'Already have an account? Login',

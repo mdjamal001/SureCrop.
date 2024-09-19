@@ -4,7 +4,6 @@ import 'package:sure_crop/screens/contract_details.dart';
 
 import 'buyeroffercontract_page.dart';
 
-// Main Page to display the list of offerings
 class OfferingsPage extends StatelessWidget {
   final List<Map<String, String>> buyers = [
     {
@@ -42,7 +41,6 @@ class OfferingsPage extends StatelessWidget {
       'deliveryDate': '2024-09-28',
       'paymentMethod': 'Cash'
     },
-    // More buyers can be added
   ];
 
   @override
@@ -96,7 +94,6 @@ class OfferingsPage extends StatelessWidget {
   }
 }
 
-// Detailed page for each offering with accept/decline option
 class BuyerDetailsPage extends StatelessWidget {
   final String buyerName;
   final String pricePerKg;

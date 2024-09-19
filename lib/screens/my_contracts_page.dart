@@ -21,7 +21,6 @@ class MyContractsPage extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            // Active contract card (only one for now)
             Card(
               color: Colors.white,
               elevation: 3,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart'; // Ensure this dependency is included in your pubspec.yaml
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RatingReviewPage extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _RatingReviewPageState extends State<RatingReviewPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Review Submitted!')),
       );
-      Navigator.pop(context); // Navigate back to the previous screen
+      Navigator.pop(context);
     }
   }
 
@@ -47,7 +47,6 @@ class _RatingReviewPageState extends State<RatingReviewPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Service Quality Rating
               Text(
                 '1. How would you rate the farmer\'s service?',
                 style: TextStyle(fontSize: 16, color: Colors.green[700]),
@@ -71,7 +70,6 @@ class _RatingReviewPageState extends State<RatingReviewPage> {
                 },
               ),
               const SizedBox(height: 20),
-              // Crop Quality Rating
               Text(
                 '2. How would you rate the quality of the crops?',
                 style: TextStyle(fontSize: 16, color: Colors.green[700]),
@@ -167,11 +165,11 @@ class _RatingReviewPageState extends State<RatingReviewPage> {
                 onPressed: _submitReview,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(
-                      250, 100, 200, 100), // Set the button color to green
+                      250, 100, 200, 100),
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 24.0),
                   textStyle: const TextStyle(
-                      fontSize: 22, color: Colors.white), // White text color
+                      fontSize: 22, color: Colors.white),
                 ),
                 child: const Text('Submit Review'),
               ),

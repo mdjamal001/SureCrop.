@@ -44,7 +44,6 @@ class ContractTemplatesPage extends StatelessWidget {
     );
   }
 
-  // Widget to build each contract option
   Widget _buildContractOption(BuildContext context, String contractName) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8),
@@ -75,11 +74,8 @@ class ContractTemplatesPage extends StatelessWidget {
     );
   }
 
-  // Method to show contract details in a dialog box
   void _showContractDetailsDialog(BuildContext context, String contractName) {
     String contractDetails;
-
-    // Add detailed descriptions for each contract type here
     switch (contractName) {
       case 'Standard Contract':
         contractDetails = '''A Standard Contract is a legally binding agreement between two parties, typically used in business transactions. It outlines the responsibilities, obligations, and expectations of both parties. This type of contract includes standard terms and conditions, such as payment terms, delivery schedules, and dispute resolution mechanisms. Standard contracts are often used in procurement, services, and supply chain agreements. They are straightforward and commonly used for routine transactions between businesses or individuals. This contract type ensures both parties fulfill their obligations under the agreed terms.''';
@@ -106,7 +102,6 @@ class ContractTemplatesPage extends StatelessWidget {
         contractDetails = 'No details available for this contract type.';
     }
 
-    // Show the dialog box with the contract details
     showDialog(
       context: context,
       builder: (BuildContext context) {

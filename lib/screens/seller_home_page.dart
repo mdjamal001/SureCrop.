@@ -182,7 +182,7 @@ class HomePage extends StatelessWidget {
                               ),
                             );
                           },
-                          icon: Icon(Icons.storefront),
+                          icon: Icon(Icons.local_offer_outlined),
                           label: Text('  Offerings'),
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(140, 0),
@@ -215,20 +215,19 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  height: 200, // Set the height of the container
+                  height: 200,
                   child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal, // Scroll horizontally
+                    scrollDirection: Axis.horizontal, //horizontal scrolling
                     child: Row(
                       children: List.generate(5, (index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: GestureDetector(
                             onTap: () {
-                              // Implement action on video tap
                               print('Play video $index');
                             },
                             child: Container(
-                              width: 300, // Set width for each video card
+                              width: 300,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),

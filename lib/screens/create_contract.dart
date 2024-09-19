@@ -211,11 +211,9 @@ class _ContractFormState extends State<ContractForm> {
     }
   }
 
-  // Function to handle form submission
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Submit the contract terms
       print(
           'Contract Details: Crop Category: $_cropCategory, Crop: $_crop, Quantity: $_quantity, Price: $_price, Delivery Date: $_deliveryDate');
     }
@@ -295,7 +293,6 @@ class _ContractFormState extends State<ContractForm> {
                 ),
                 SizedBox(height: 20),
 
-                // Quantity Text Field
                 _buildTextField(
                   label: 'Quantity (kg)',
                   keyboardType: TextInputType.number,
@@ -310,7 +307,6 @@ class _ContractFormState extends State<ContractForm> {
                 ),
                 SizedBox(height: 20),
 
-                // Price Text Field
                 _buildTextField(
                   label: 'Price per kg (₹)',
                   keyboardType: TextInputType.datetime,
@@ -462,13 +458,12 @@ class _ContractFormState extends State<ContractForm> {
         isExpanded:
             true, // Ensure text doesn't get truncated inside the dropdown
         menuMaxHeight:
-            200, // Custom max height for the dropdown menu (scrollable)
+            200,
         icon: Icon(Icons.arrow_drop_down),
       ),
     );
   }
 
-  // Helper to build text fields with consistent styling
   Widget _buildTextField({
     required String label,
     required TextInputType keyboardType,

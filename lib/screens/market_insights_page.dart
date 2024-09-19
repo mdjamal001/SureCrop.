@@ -8,14 +8,12 @@ class MarketInsightsPage extends StatefulWidget {
 }
 
 class _MarketInsightsPageState extends State<MarketInsightsPage> {
-  // The total number of rows to display initially and when expanded
+
   final int _initialRowsToShow = 10;
   final int _totalRows = 100;
 
-  // Track whether the "Show More" button has been clicked
   bool _showAll = false;
 
-  // Sample data for crops
   List<Map<String, String>> _cropData = [
     {'crop': 'Wheat', 'price': '₹50', 'change': '2.5%'},
     {'crop': 'Rice', 'price': '₹60', 'change': '-1.2%'},
@@ -124,7 +122,6 @@ class _MarketInsightsPageState extends State<MarketInsightsPage> {
   }
 
   Widget _buildCurrentMarketPrices() {
-    // Determine the number of rows to show based on _showAll
     final rowsToShow = _showAll ? _cropData : _cropData.take(_initialRowsToShow).toList();
 
     return Padding(

@@ -89,7 +89,8 @@ class ContractDetailsPage extends StatelessWidget {
             _buildTextField('Termination Clause', 'Enter termination clause',
                 terminationClauseController, false),
             SizedBox(height: 20),
-            // Terms and Conditions with multi-line support
+
+
             _buildTextField(
               'Terms and Conditions',
               'Enter Terms and Conditions',
@@ -119,7 +120,6 @@ class ContractDetailsPage extends StatelessWidget {
     );
   }
 
-  // Helper method to build TextFields
   Widget _buildTextField(String label, String placeholder,
       TextEditingController controller, bool isReadOnly,
       {int maxLines = 1}) {
@@ -145,7 +145,6 @@ class ContractDetailsPage extends StatelessWidget {
     );
   }
 
-  // Helper method to build checkboxes for selection options
   Widget _buildCheckBoxField(String label, List<String> options) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +157,6 @@ class ContractDetailsPage extends StatelessWidget {
               title: Text(option),
               value: false,
               onChanged: (bool? value) {
-                // Handle checkbox state change
               },
             );
           }).toList(),

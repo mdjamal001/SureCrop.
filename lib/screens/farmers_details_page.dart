@@ -24,7 +24,6 @@ class FarmerDetailsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Farmer and Crop Details Section
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(

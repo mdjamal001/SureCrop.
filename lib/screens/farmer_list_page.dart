@@ -53,7 +53,7 @@ class FarmerListPage extends StatelessWidget {
               ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                // Navigate to detailed farmer page (or initiate contract, etc.)
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

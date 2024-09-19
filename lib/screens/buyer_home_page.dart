@@ -196,7 +196,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  height: 200, // Set the height of the container
+                  height: 200,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal, // Scroll horizontally
                     child: Row(
@@ -205,11 +205,10 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: GestureDetector(
                             onTap: () {
-                              // Implement action on video tap
                               print('Play video $index');
                             },
                             child: Container(
-                              width: 300, // Set width for each video card
+                              width: 300,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -361,7 +360,7 @@ class _CategoryGridState extends State<CategoryGrid> {
     {'name': 'Oilseeds', 'image': 'assets/categories/oilseeds.jpeg'},
   ];
 
-  // Example crop data for each category
+  // crop data for each category
   final Map<String, List<String>> cropData = {
     'Grains': [
       'Wheat',
@@ -523,9 +522,7 @@ class _CategoryGridState extends State<CategoryGrid> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            // Get the selected category name
             String categoryName = categories[index]['name']!;
-            // Get the crops for the selected category
             List<String> selectedCrops = cropData[categoryName]!;
 
             Navigator.push(

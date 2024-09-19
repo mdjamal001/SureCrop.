@@ -41,14 +41,13 @@ class _ChatListPageState extends State<ChatListPage> {
               leading: CircleAvatar(
                 backgroundColor: primaryCol,
                 child: Text(
-                  chat['name']![0], // First letter of the name
+                  chat['name']![0],
                   style: TextStyle(color: Colors.white),
                 ),
               ),
               title: Text(chat['name']!),
               subtitle: Text(chat['lastMessage']!),
               onTap: () {
-                // Navigate to the ChatPage when a chat is tapped
                 Navigator.push(
                   context,
                   MaterialPageRoute(

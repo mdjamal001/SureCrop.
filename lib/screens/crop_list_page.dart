@@ -5,7 +5,6 @@ class CropListPage extends StatelessWidget {
   final String categoryName;
   final List<String> crops;
 
-  // Example farmer data for each crop
   final Map<String, List<Map<String, String>>> farmerData = {
     'Wheat': [
       {'name': 'Ramu', 'rating': '4.5', 'price': '20'},
@@ -29,7 +28,6 @@ class CropListPage extends StatelessWidget {
       {'name': 'Abhishek', 'rating': '3.9', 'price': '28'},
       {'name': 'Yakaiah', 'rating': '4.7', 'price': '35'},
     ],
-    // Add more farmer data for other crops
   };
 
   CropListPage({required this.categoryName, required this.crops});
@@ -79,7 +77,7 @@ class CropListPage extends StatelessWidget {
                   List<Map<String, String>> selectedFarmers =
                       farmerData[crops[index]] ?? [];
 
-                  // Navigate to FarmerListPage, passing the selected farmers data
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

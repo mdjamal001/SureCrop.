@@ -15,13 +15,12 @@ class _LogInPageState extends State<LogInPage> {
   String _password = '';
   bool _isLoading = false;
 
-  // Function to handle sign-in
   Future<void> _signIn() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
       setState(() {
-        _isLoading = true; // Show the loading indicator
+        _isLoading = true; //
       });
 
       final url = 'https://f544-2401-4900-6751-f32d-d35-fd4-1214-8c09.ngrok-free.app/signin'; // Your updated backend URL
@@ -40,7 +39,6 @@ class _LogInPageState extends State<LogInPage> {
           final responseData = jsonDecode(response.body);
           final role = responseData['role'];
 
-          // Navigate based on role
           if (role == 'Buyer') {
             Navigator.pushNamed(context, '/buyerHome');
           } else {
@@ -48,20 +46,18 @@ class _LogInPageState extends State<LogInPage> {
           }
 
         } else {
-          // Handle error response
           final responseData = jsonDecode(response.body);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error: ${responseData['error']}')),
           );
         }
       } catch (error) {
-        // Handle network error
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Network Error: $error')),
         );
       } finally {
         setState(() {
-          _isLoading = false; // Hide the loading indicator
+          _isLoading = false;
         });
       }
     }
@@ -133,9 +129,9 @@ class _LogInPageState extends State<LogInPage> {
                 ),
                 SizedBox(height: 40.0),
                 _isLoading
-                    ? Center(child: CircularProgressIndicator()) // Loading spinner
+                    ? Center(child: CircularProgressIndicator())
                     : ElevatedButton(
-                  onPressed: _signIn, // Call sign-in function
+                  onPressed: _signIn,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryCol,
                     padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -148,7 +144,7 @@ class _LogInPageState extends State<LogInPage> {
                 SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup'); // Navigate to sign-up page
+                    Navigator.pushNamed(context, '/signup');
                   },
                   child: Text(
                     'Don’t have an account? Sign Up',

@@ -66,7 +66,6 @@ class ContractDetailsPage extends StatelessWidget {
               _buildLargeButton(
                 label: 'Track Progress',
                 onPressed: () {
-                  // Functionality for tracking progress to be added later
                 },
               ),
               SizedBox(height: 20),
@@ -127,14 +126,14 @@ class ContractDetailsPage extends StatelessWidget {
       {required String label, required VoidCallback onPressed}) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryCol, // Set the button color to green
+        backgroundColor: primaryCol,
         padding: EdgeInsets.symmetric(
-            vertical: 15), // Increase vertical padding for larger buttons
+            vertical: 15),
         textStyle: TextStyle(
             color: Colors.white,
-            fontSize: 18), // Increase font size to make text stand out
+            fontSize: 18),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8), // Keep rounded corners
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       onPressed: onPressed,

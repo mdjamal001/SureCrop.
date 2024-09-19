@@ -8,7 +8,7 @@ class GeneratedContractPage extends StatefulWidget {
 
 class _GeneratedContractPageState extends State<GeneratedContractPage> {
   bool _isContractSent =
-  false; // This keeps track of whether the contract has been sent
+  false;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _GeneratedContractPageState extends State<GeneratedContractPage> {
             ),
             SizedBox(height: 30),
 
-            // Send button or confirmation text
+
             _isContractSent
                 ? Center(
               child: Text(
@@ -113,12 +113,12 @@ class _GeneratedContractPageState extends State<GeneratedContractPage> {
                       onPressed: () {
                         setState(() {
                           _isContractSent =
-                          true; // After sending, change the state
+                          true;
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryCol, // Green button color
-                        minimumSize: Size(200, 60), // Button size
+                        backgroundColor: primaryCol,
+                        minimumSize: Size(200, 60),
                         textStyle: TextStyle(
                             color: Colors.white, fontSize: 18), // Text style
                       ),

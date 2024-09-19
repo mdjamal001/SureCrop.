@@ -131,7 +131,6 @@ class _MyContractsPageState extends State<FarmerMyContractsPage> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  // Action for viewing contract details
                                 },
                                 child: Text('View Details',style: TextStyle(color: Colors.white),),
                                 style: ElevatedButton.styleFrom(
@@ -143,7 +142,6 @@ class _MyContractsPageState extends State<FarmerMyContractsPage> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Action for terminating contract
                                 },
                                 child: Text('Terminate',style: TextStyle(color: Colors.white),),
                                 style: ElevatedButton.styleFrom(

@@ -6,7 +6,7 @@ class LanguageSelectionPage extends StatefulWidget {
 }
 
 class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
-  String? _selectedLanguage; // Holds the selected language
+  String? _selectedLanguage;
 
   final List<Map<String, String>> _languages = [
     {'code': 'en', 'name': 'English'},
@@ -27,7 +27,6 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
     Colors.purpleAccent,
   ];
 
-  // Handle language selection
   void _onLanguageSelect(String languageCode) {
     setState(() {
       _selectedLanguage = languageCode;
@@ -48,7 +47,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
               child: GridView.builder(
                 itemCount: _languages.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Two languages per row
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -84,7 +83,6 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
               onPressed: _selectedLanguage == null
                   ? null // Disable button if no language is selected
                   : () {
-                // Perform action on proceed (e.g., navigate to another page)
                 Navigator.pushNamed(context, '/signup');
               },
               style: ElevatedButton.styleFrom(
