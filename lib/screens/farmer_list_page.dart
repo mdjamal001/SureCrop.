@@ -30,15 +30,15 @@ class FarmerListPage extends StatelessWidget {
           Icon(Icons.filter_alt),
           SizedBox(width: 10,)
         ],
-        
+
       ),
       body: ListView.builder(
         itemCount: farmers.length,
         itemBuilder: (context, index) {
           return Card(
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.only(top: 10,left: 8,right: 8),
             child: ListTile(
-              contentPadding: EdgeInsets.all(15),
+              contentPadding: EdgeInsets.all(16),
               title: Text(
                 farmers[index]['name']!,
                 style: TextStyle(fontWeight: FontWeight.bold),

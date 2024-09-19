@@ -39,6 +39,7 @@ class CropListPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
+
         title: Text('$categoryName'),
       ),
       body: ListView.builder(

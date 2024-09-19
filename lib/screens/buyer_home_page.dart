@@ -3,6 +3,7 @@ import 'package:sure_crop/screens/chat_list_page.dart';
 
 import 'chat_list_page.dart';
 import 'crop_list_page.dart';
+import 'market_insights_page.dart';
 
 Color primaryCol = const Color(0xFF33A864);
 
@@ -77,16 +78,15 @@ class HomePage extends StatelessWidget {
         title: Image.asset('assets/app_logo.png', height: 40),
         actions: [
           IconButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                  builder: (context) =>SearchPage(),
-                ) as Route<Object?>,
+                    builder: (context) => SearchPage(),
+                  ) as Route<Object?>,
                 );
               },
-              icon: Icon(Icons.search)
-          ),
+              icon: Icon(Icons.search)),
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {},
@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -131,7 +131,14 @@ class HomePage extends StatelessWidget {
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MarketInsightsPage(),
+                        ),
+                      );
+                    },
                     icon: Icon(Icons.storefront),
                     label: Text('Market Now'),
                     style: ElevatedButton.styleFrom(
@@ -157,22 +164,20 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
 
-
             Container(
-              // padding: EdgeInsets.all()
-              height: 280,
-              width: 500,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                CategoryGrid(),
-              ],
-            )
-            ),
+                // padding: EdgeInsets.all()
+                height: 280,
+                width: 500,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    CategoryGrid(),
+                  ],
+                )),
 
             SizedBox(height: 40),
             //tutorial videos
@@ -184,7 +189,6 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-
                   ),
                 ),
                 SizedBox(height: 20),
@@ -210,7 +214,8 @@ class HomePage extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.play_circle_outline, size: 80, color: Colors.grey.shade600),
+                                  Icon(Icons.play_circle_outline,
+                                      size: 80, color: Colors.grey.shade600),
                                   SizedBox(height: 10),
                                   Text(
                                     'Tutorial Video ${index + 1}',
@@ -231,7 +236,9 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text(
               "Need Help?",
               style: TextStyle(
@@ -252,8 +259,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
-                    ),
+                        color: Colors.white),
                   ),
                   Icon(
                     Icons.headset_mic,
@@ -266,7 +272,6 @@ class HomePage extends StatelessWidget {
                 color: primaryCol,
                 borderRadius: BorderRadius.circular(10),
               ),
-
             ),
 
             SizedBox(height: 10),
@@ -281,8 +286,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
-                    ),
+                        color: Colors.white),
                   ),
                   Icon(
                     Icons.phone_in_talk,
@@ -295,7 +299,6 @@ class HomePage extends StatelessWidget {
                 color: primaryCol,
                 borderRadius: BorderRadius.circular(10),
               ),
-
             ),
 
             SizedBox(height: 10),
@@ -310,8 +313,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
-                    ),
+                        color: Colors.white),
                   ),
                   Icon(
                     Icons.info,
@@ -324,7 +326,6 @@ class HomePage extends StatelessWidget {
                 color: primaryCol,
                 borderRadius: BorderRadius.circular(10),
               ),
-
             ),
 
             SizedBox(height: 20),
@@ -359,18 +360,150 @@ class _CategoryGridState extends State<CategoryGrid> {
 
   // Example crop data for each category
   final Map<String, List<String>> cropData = {
-    'Grains': ['Wheat', 'Rice', 'Barley', 'Corn', 'Oats', 'Millet', 'Rye', 'Sorghum', 'Quinoa', 'Buckwheat'],
-    'Fruits': ['Apple', 'Banana', 'Grapes', 'Mango', 'Orange', 'Pineapple', 'Pomegranate', 'Papaya', 'Strawberry', 'Blueberry'],
-    'Vegetables': ['Tomato', 'Potato', 'Carrot', 'Broccoli', 'Spinach', 'Cabbage', 'Cucumber', 'Pepper', 'Onion', 'Garlic'],
-    'Livestock': ['Cattle', 'Sheep', 'Goat', 'Pig', 'Chicken', 'Duck', 'Turkey', 'Rabbit', 'Buffalo', 'Horse'],
-    'Spices': ['Pepper', 'Turmeric', 'Ginger', 'Cumin', 'Coriander', 'Cardamom', 'Cloves', 'Cinnamon', 'Saffron', 'Mustard'],
-    'Nuts': ['Almond', 'Cashew', 'Peanut', 'Walnut', 'Pistachio', 'Hazelnut', 'Macadamia', 'Brazil Nut', 'Pine Nut', 'Pecan'],
-    'Fiber Crops': ['Cotton', 'Jute', 'Flax', 'Hemp', 'Ramie', 'Kenaf', 'Coir', 'Sisal', 'Abaca', 'Kapok'],
-    'Dairy': ['Milk', 'Cheese', 'Butter', 'Yogurt', 'Cream', 'Ghee', 'Lassi', 'Paneer', 'Buttermilk', 'Condensed Milk'],
-    'Aqua': ['Fish', 'Shrimp', 'Lobster', 'Crab', 'Oyster', 'Clam', 'Squid', 'Tuna', 'Salmon', 'Trout'],
-    'Beverages': ['Tea', 'Coffee', 'Cocoa', 'Juice', 'Smoothie', 'Soda', 'Wine', 'Beer', 'Milkshake', 'Lemonade'],
-    'Medicinal': ['Aloe Vera', 'Mint', 'Neem', 'Basil', 'Ginseng', 'Lavender', 'Thyme', 'Chamomile', 'Eucalyptus', 'Peppermint'],
-    'Oilseeds': ['Sunflower', 'Soybean', 'Peanut', 'Sesame', 'Rapeseed', 'Cottonseed', 'Flaxseed', 'Safflower', 'Mustard', 'Palm Oil'],
+    'Grains': [
+      'Wheat',
+      'Rice',
+      'Barley',
+      'Corn',
+      'Oats',
+      'Millet',
+      'Rye',
+      'Sorghum',
+      'Quinoa',
+      'Buckwheat'
+    ],
+    'Fruits': [
+      'Apple',
+      'Banana',
+      'Grapes',
+      'Mango',
+      'Orange',
+      'Pineapple',
+      'Pomegranate',
+      'Papaya',
+      'Strawberry',
+      'Blueberry'
+    ],
+    'Vegetables': [
+      'Tomato',
+      'Potato',
+      'Carrot',
+      'Broccoli',
+      'Spinach',
+      'Cabbage',
+      'Cucumber',
+      'Pepper',
+      'Onion',
+      'Garlic'
+    ],
+    'Livestock': [
+      'Cattle',
+      'Sheep',
+      'Goat',
+      'Pig',
+      'Chicken',
+      'Duck',
+      'Turkey',
+      'Rabbit',
+      'Buffalo',
+      'Horse'
+    ],
+    'Spices': [
+      'Pepper',
+      'Turmeric',
+      'Ginger',
+      'Cumin',
+      'Coriander',
+      'Cardamom',
+      'Cloves',
+      'Cinnamon',
+      'Saffron',
+      'Mustard'
+    ],
+    'Nuts': [
+      'Almond',
+      'Cashew',
+      'Peanut',
+      'Walnut',
+      'Pistachio',
+      'Hazelnut',
+      'Macadamia',
+      'Brazil Nut',
+      'Pine Nut',
+      'Pecan'
+    ],
+    'Fiber Crops': [
+      'Cotton',
+      'Jute',
+      'Flax',
+      'Hemp',
+      'Ramie',
+      'Kenaf',
+      'Coir',
+      'Sisal',
+      'Abaca',
+      'Kapok'
+    ],
+    'Dairy': [
+      'Milk',
+      'Cheese',
+      'Butter',
+      'Yogurt',
+      'Cream',
+      'Ghee',
+      'Lassi',
+      'Paneer',
+      'Buttermilk',
+      'Condensed Milk'
+    ],
+    'Aqua': [
+      'Fish',
+      'Shrimp',
+      'Lobster',
+      'Crab',
+      'Oyster',
+      'Clam',
+      'Squid',
+      'Tuna',
+      'Salmon',
+      'Trout'
+    ],
+    'Beverages': [
+      'Tea',
+      'Coffee',
+      'Cocoa',
+      'Juice',
+      'Smoothie',
+      'Soda',
+      'Wine',
+      'Beer',
+      'Milkshake',
+      'Lemonade'
+    ],
+    'Medicinal': [
+      'Aloe Vera',
+      'Mint',
+      'Neem',
+      'Basil',
+      'Ginseng',
+      'Lavender',
+      'Thyme',
+      'Chamomile',
+      'Eucalyptus',
+      'Peppermint'
+    ],
+    'Oilseeds': [
+      'Sunflower',
+      'Soybean',
+      'Peanut',
+      'Sesame',
+      'Rapeseed',
+      'Cottonseed',
+      'Flaxseed',
+      'Safflower',
+      'Mustard',
+      'Palm Oil'
+    ],
   };
 
   @override
@@ -444,34 +577,31 @@ class _CategoryGridState extends State<CategoryGrid> {
   }
 }
 
-
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Search',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: primaryCol,
-      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: TextField(
-          decoration: InputDecoration(
-            labelText: 'Search',
-            labelStyle: TextStyle(color: Colors.grey),
-            filled: true,
-            fillColor: Colors.grey.shade300,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
+        child: Column(
+          children: [
+            SizedBox(height: 40,),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Search',
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.grey.shade300,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                prefixIcon: Icon(Icons.search),
+              ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            prefixIcon: Icon(Icons.search),
-          ),
+          ],
         ),
       ),
     );
