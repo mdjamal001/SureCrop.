@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sure_crop/screens/buyer_home_page.dart';
 
+import 'generated_contract_page.dart';
+
 class ContractDetailsPage extends StatelessWidget {
   final TextEditingController farmerNameController =
   TextEditingController(text: 'Vijay Kumar');
@@ -98,11 +100,11 @@ class ContractDetailsPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => GeneratedContractPage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GeneratedContractPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryCol,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sure_crop/screens/languages_page.dart';
 import 'screens/login_page.dart';
 import 'screens/buyer_home_page.dart';
 import 'screens/seller_home_page.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LogInPage(),
+        '/': (context) => LanguageSelectionPage(),
+        '/signin': (context) => LogInPage(),
         '/signup': (context) => SignUpPage(),
         '/buyerHome': (context) => BuyerHomePage(),
         '/sellerHome': (context) => SellerHomePage(),

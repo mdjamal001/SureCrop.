@@ -227,13 +227,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 SizedBox(height: 10.0),
-                _isLoading
-                    ? Center(child: CircularProgressIndicator())
-                    : ElevatedButton(
+                 ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate() && isChecked) {
-                            _formKey.currentState!.save();
-                            _signUp(); // Call sign-up function
+                            if (_role == 'Buyer') {
+                              Navigator.pushNamed(context, '/buyerHome');
+                            } else {
+                              Navigator.pushNamed(context, '/sellerHome');
+                            }
                           } else {
                             print("Fields not filled or checkbox not checked");
                           }
@@ -250,7 +251,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context); // Navigate back to login
+                    Navigator.pushNamed(context, '/signin'); // Navigate back to login
                   },
                   child: Text(
                     'Already have an account? Login',

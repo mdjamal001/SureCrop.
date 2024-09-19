@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sure_crop/screens/buyer_home_page.dart';
 
 class ChatPage extends StatefulWidget {
   final String userName; // The name of the person you're chatting with
@@ -31,7 +32,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.userName),
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: primaryCol,
       ),
       body: Column(
         children: [

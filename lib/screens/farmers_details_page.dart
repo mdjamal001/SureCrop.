@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sure_crop/screens/chat_page.dart';
 import 'package:sure_crop/screens/contract_types.dart';
 
 class FarmerDetailsPage extends StatelessWidget {
@@ -65,12 +66,14 @@ class FarmerDetailsPage extends StatelessWidget {
                     SizedBox(height: 15),
                     Text(
                       'Crop: $cropName',
-                      style: TextStyle(fontSize: 18, color: Colors.grey.shade800),
+                      style:
+                          TextStyle(fontSize: 18, color: Colors.grey.shade800),
                     ),
                     SizedBox(height: 10),
                     Text(
                       'Price: ₹$price/kg',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -97,7 +100,7 @@ class FarmerDetailsPage extends StatelessWidget {
                     Text(
                       'Ratings & Reviews',
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -125,12 +128,12 @@ class FarmerDetailsPage extends StatelessWidget {
                 children: [
                   ElevatedButton.icon(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                          Text('Chat with Farmer feature coming soon!'),
-                        ),
-                      );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatPage(
+                                    userName: farmerName,
+                                  )));
                     },
                     icon: Icon(Icons.chat, color: Colors.white),
                     label: Text('Chat',
@@ -138,7 +141,7 @@ class FarmerDetailsPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade600,
                       padding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -222,7 +225,7 @@ class FarmerDetailsPage extends StatelessWidget {
                     Text(
                       'Farm Location',
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     Container(
@@ -255,7 +258,7 @@ class FarmerDetailsPage extends StatelessWidget {
                     Text(
                       'Contact Information',
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     Row(

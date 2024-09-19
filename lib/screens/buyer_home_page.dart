@@ -4,6 +4,7 @@ import 'package:sure_crop/screens/chat_list_page.dart';
 import 'chat_list_page.dart';
 import 'crop_list_page.dart';
 import 'market_insights_page.dart';
+import 'my_contracts_page.dart';
 
 Color primaryCol = const Color(0xFF33A864);
 
@@ -118,7 +119,9 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyContractsPage()));
+                    },
                     icon: Icon(Icons.description),
                     label: Text('My Contracts'),
                     style: ElevatedButton.styleFrom(
